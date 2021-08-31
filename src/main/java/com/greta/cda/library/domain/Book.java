@@ -1,4 +1,4 @@
-package com.greta.cda.domain;
+package com.greta.cda.library.domain;
 
 import java.util.Objects;
 import java.util.UUID;

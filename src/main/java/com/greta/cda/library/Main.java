@@ -1,9 +1,9 @@
-package com.greta.cda;
+package com.greta.cda.library;
 
-import com.greta.cda.cli.CliController;
-import com.greta.cda.dao.BookDao;
-import com.greta.cda.dao.BookDaoInMemory;
-import com.greta.cda.service.BookService;
+import com.greta.cda.library.cli.CliController;
+import com.greta.cda.library.dao.BookDao;
+import com.greta.cda.library.dao.BookDaoInMemory;
+import com.greta.cda.library.service.BookService;
 
 public class Main {
 

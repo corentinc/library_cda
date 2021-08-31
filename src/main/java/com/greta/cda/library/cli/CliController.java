@@ -1,7 +1,7 @@
-package com.greta.cda.cli;
+package com.greta.cda.library.cli;
 
-import com.greta.cda.domain.Book;
-import com.greta.cda.service.BookService;
+import com.greta.cda.library.domain.Book;
+import com.greta.cda.library.service.BookService;
 
 import java.util.Iterator;
 import java.util.Scanner;

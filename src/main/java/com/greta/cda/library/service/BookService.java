@@ -1,7 +1,7 @@
-package com.greta.cda.service;
+package com.greta.cda.library.service;
 
-import com.greta.cda.dao.BookDao;
-import com.greta.cda.domain.Book;
+import com.greta.cda.library.dao.BookDao;
+import com.greta.cda.library.domain.Book;
 
 import java.util.Iterator;
 import java.util.List;
