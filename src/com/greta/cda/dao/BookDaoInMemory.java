@@ -3,7 +3,9 @@ package com.greta.cda.dao;
 import com.greta.cda.domain.Book;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Implémente l'interface BookDAO
@@ -18,7 +20,18 @@ public class BookDaoInMemory implements BookDao {
     }
 
     @Override
+    public Iterator<Book> iteratorOnAll() {
+        return books.iterator();
+    }
+
+    @Override
     public void add(Book book) {
         books.add(book);
+    }
+
+    public List<Book> findBooksContainingName(String name) {
+        return books.stream()
+                .filter(book -> book.getName().toLowerCase().contains(name.toLowerCase()))
+                .collect(Collectors.toList());
     }
 }

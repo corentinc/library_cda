@@ -3,6 +3,7 @@ package com.greta.cda.service;
 import com.greta.cda.dao.BookDao;
 import com.greta.cda.domain.Book;
 
+import java.util.Iterator;
 import java.util.List;
 import java.util.UUID;
 
@@ -20,7 +21,11 @@ public class BookService {
         bookDao.add(newBook);
     }
 
-    public List<Book> findAll() {
-        return bookDao.findAll();
+    public Iterator<Book> findAll() {
+        return bookDao.iteratorOnAll();
+    }
+
+    public List<Book> findBooksContainingName(String name) {
+        return bookDao.findBooksContainingName(name);
     }
 }

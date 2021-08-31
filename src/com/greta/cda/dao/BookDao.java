@@ -2,6 +2,7 @@ package com.greta.cda.dao;
 
 import com.greta.cda.domain.Book;
 
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -10,5 +11,9 @@ import java.util.List;
 public interface BookDao {
     List<Book> findAll();
 
+    Iterator<Book> iteratorOnAll();
+
     void add(Book book);
+
+    List<Book> findBooksContainingName(String name);
 }
