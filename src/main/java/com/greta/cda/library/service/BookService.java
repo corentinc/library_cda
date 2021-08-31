@@ -2,6 +2,7 @@ package com.greta.cda.library.service;
 
 import com.greta.cda.library.dao.BookDao;
 import com.greta.cda.library.domain.Book;
+import com.greta.cda.library.exception.BookNotFoundException;
 
 import java.util.Iterator;
 import java.util.List;
@@ -27,5 +28,16 @@ public class BookService {
 
     public List<Book> findBooksContainingName(String name) {
         return bookDao.findBooksContainingName(name);
+    }
+
+    public Book findById(UUID id) {
+//        Optional<Book> optionalBook = bookDao.findById(id);
+//        if (optionalBook.isPresent()) {
+//            return optionalBook.get();
+//        }
+//        throw new BookNotFoundException(id);
+
+        return bookDao.findById(id)
+                .orElseThrow(() -> new BookNotFoundException(id));
     }
 }

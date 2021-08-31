@@ -2,15 +2,14 @@ package com.greta.cda.library.service;
 
 import com.greta.cda.library.dao.BookDao;
 import com.greta.cda.library.domain.Book;
+import com.greta.cda.library.exception.BookNotFoundException;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.ArgumentCaptor;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.*;
@@ -64,5 +63,28 @@ public class BookServiceTest {
         Book bookSentToDAO = bookArgumentCaptor.getValue();
         assertThat(bookSentToDAO.getId(), is(notNullValue()));
         assertThat(bookSentToDAO.getName(), is("Toto"));
+    }
+
+    @Test
+    public void findById() {
+        UUID searchedId = UUID.randomUUID();
+        Book expectedBook = new Book(searchedId, "toto");
+        Optional<Book> optionalReturnedByDao = Optional.of(expectedBook);
+        when(mockedDao.findById(searchedId)).thenReturn(optionalReturnedByDao);
+
+        Book actualBook = bookService.findById(searchedId);
+
+        assertThat(actualBook, equalTo(expectedBook));
+    }
+
+    @Test
+    public void findById_whenBookNotFound() {
+        UUID searchedId = UUID.randomUUID();
+        when(mockedDao.findById(searchedId)).thenReturn(Optional.empty());
+
+        assertThatThrownBy(() -> bookService.findById(searchedId))
+                .isInstanceOf(BookNotFoundException.class)
+                .hasMessage("Aucun livre trouvé avec le UUID : " + searchedId);
+
     }
 }

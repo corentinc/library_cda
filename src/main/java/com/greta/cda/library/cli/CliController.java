@@ -5,6 +5,7 @@ import com.greta.cda.library.service.BookService;
 
 import java.util.Iterator;
 import java.util.Scanner;
+import java.util.UUID;
 
 /**
  * Est responsable des entrée/sortie utilisateurs
@@ -21,6 +22,7 @@ public class CliController {
         System.out.println("--------------------");
         System.out.println("1 - Afficher l'ensemble des livres");
         System.out.println("2 - Rechercher par titre");
+        System.out.println("3 - Rechercher par id");
         System.out.println("--------------------");
         Scanner scanner = new Scanner(System.in);
         String choice = scanner.next();
@@ -34,6 +36,10 @@ public class CliController {
             System.out.println("Quel titre ? : ");
             String searchedName = scanner.next();
             bookService.findBooksContainingName(searchedName).forEach(book -> System.out.println(book));
+        } else if (choice.equals("3")) {
+            System.out.println("Quel id ? : ");
+            String id = scanner.next();
+            bookService.findById(UUID.fromString(id));
         }
 
     }

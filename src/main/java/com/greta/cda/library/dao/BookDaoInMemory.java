@@ -2,9 +2,7 @@ package com.greta.cda.library.dao;
 
 import com.greta.cda.library.domain.Book;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -33,5 +31,19 @@ public class BookDaoInMemory implements BookDao {
         return books.stream()
                 .filter(book -> book.getName().toLowerCase().contains(name.toLowerCase()))
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public Optional<Book> findById(UUID id) {
+//        for (Book book : books) {
+//            if (book.getId().equals(id)) {
+//                return Optional.of(book);
+//            }
+//        }
+//        return Optional.empty();
+
+        return books.stream()
+                .filter(book -> book.getId().equals(id))
+                .findFirst();
     }
 }
