@@ -4,16 +4,16 @@ import com.greta.cda.library.dao.BookDao;
 import com.greta.cda.library.domain.Book;
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.ArgumentCaptor;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
-import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.assertThat;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 public class BookServiceTest {
     BookDao mockedDao;
@@ -52,5 +52,17 @@ public class BookServiceTest {
         List<Book> actualBooks = bookService.findBooksContainingName("Nicolas");
 
         assertThat(actualBooks.size(), equalTo(0));
+    }
+
+    @Test
+    public void add() {
+        bookService.add("Toto");
+
+        ArgumentCaptor<Book> bookArgumentCaptor = ArgumentCaptor.forClass(Book.class);
+        verify(mockedDao).add(bookArgumentCaptor.capture());
+
+        Book bookSentToDAO = bookArgumentCaptor.getValue();
+        assertThat(bookSentToDAO.getId(), is(notNullValue()));
+        assertThat(bookSentToDAO.getName(), is("Toto"));
     }
 }
