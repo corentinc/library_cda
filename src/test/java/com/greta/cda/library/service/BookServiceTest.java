@@ -3,22 +3,22 @@ package com.greta.cda.library.service;
 import com.greta.cda.library.dao.BookDao;
 import com.greta.cda.library.domain.Book;
 import com.greta.cda.library.exception.BookNotFoundException;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
 
 import java.util.*;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.hamcrest.CoreMatchers.*;
-import static org.junit.Assert.assertThat;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.mockito.Mockito.*;
 
 public class BookServiceTest {
     BookDao mockedDao;
     BookService bookService;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         // mock : simulation de comportemant d'une classe
         mockedDao = mock(BookDao.class);

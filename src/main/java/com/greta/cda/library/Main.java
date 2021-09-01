@@ -2,13 +2,15 @@ package com.greta.cda.library;
 
 import com.greta.cda.library.cli.CliController;
 import com.greta.cda.library.service.BookService;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ApplicationContext;
 
+@SpringBootApplication
 public class Main {
 
     public static void main(String[] args) {
-        ClassPathXmlApplicationContext applicationContext =
-                new ClassPathXmlApplicationContext("applicationContext.xml");
+        ApplicationContext applicationContext = SpringApplication.run(Main.class, args);
 
         BookService bookService = applicationContext.getBean(BookService.class);
         initData(bookService);
