@@ -1,18 +1,19 @@
 package com.greta.cda.library;
 
 import com.greta.cda.library.cli.CliController;
-import com.greta.cda.library.dao.BookDao;
-import com.greta.cda.library.dao.BookDaoInMemory;
 import com.greta.cda.library.service.BookService;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 public class Main {
 
     public static void main(String[] args) {
-        BookDao bookDao = new BookDaoInMemory();
-        BookService bookService = new BookService(bookDao);
-        CliController cliController = new CliController(bookService);
+        ClassPathXmlApplicationContext applicationContext =
+                new ClassPathXmlApplicationContext("applicationContext.xml");
+
+        BookService bookService = applicationContext.getBean(BookService.class);
         initData(bookService);
-        cliController.start();
+
+        applicationContext.getBean(CliController.class).start();
     }
 
     /**
