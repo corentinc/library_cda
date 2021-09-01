@@ -2,6 +2,7 @@ package com.greta.cda.library.cli;
 
 import com.greta.cda.library.domain.Book;
 import com.greta.cda.library.service.BookService;
+import org.springframework.stereotype.Controller;
 
 import java.util.Iterator;
 import java.util.Scanner;
@@ -10,6 +11,7 @@ import java.util.UUID;
 /**
  * Est responsable des entrée/sortie utilisateurs
  */
+@Controller
 public class CliController {
     // a un dépendance vers bookService
     private BookService bookService;

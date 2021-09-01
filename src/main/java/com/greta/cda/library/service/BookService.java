@@ -3,11 +3,13 @@ package com.greta.cda.library.service;
 import com.greta.cda.library.dao.BookDao;
 import com.greta.cda.library.domain.Book;
 import com.greta.cda.library.exception.BookNotFoundException;
+import org.springframework.stereotype.Service;
 
 import java.util.Iterator;
 import java.util.List;
 import java.util.UUID;
 
+@Service
 public class BookService {
     // a une dépendance vers le BookDao
     private BookDao bookDao;
