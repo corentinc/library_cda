@@ -24,8 +24,8 @@ public class BookService {
         bookDao.add(newBook);
     }
 
-    public Iterator<Book> findAll() {
-        return bookDao.iteratorOnAll();
+    public List<Book> findAll() {
+        return bookDao.findAll();
     }
 
     public List<Book> findBooksContainingName(String name) {
@@ -41,5 +41,17 @@ public class BookService {
 
         return bookDao.findById(id)
                 .orElseThrow(() -> new BookNotFoundException(id));
+    }
+
+    public void delete(UUID uuid) {
+        bookDao.delete(uuid);
+    }
+
+    public void update(UUID uuid, Book book) {
+        Book myActualBook = findById(uuid);
+        if (book.getName() != null) {
+            myActualBook.setName(book.getName());
+        }
+        bookDao.update(myActualBook);
     }
 }

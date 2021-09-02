@@ -46,4 +46,20 @@ public class BookDaoInMemory implements BookDao {
                 .filter(book -> book.getId().equals(id))
                 .findFirst();
     }
+
+    @Override
+    public void delete(UUID uuid) {
+        books.removeIf(book -> book.getId().equals(uuid));
+    }
+
+    @Override
+    public void update(Book book) {
+        int index = -1;
+        for (int i = 0; i < books.size(); i++) {
+            if (book.getId().equals(books.get(i).getId())) {
+                index = i;
+            }
+        }
+        books.set(index, book);
+    }
 }

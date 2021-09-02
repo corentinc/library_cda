@@ -20,4 +20,8 @@ public interface BookDao {
     List<Book> findBooksContainingName(String name);
 
     Optional<Book> findById(UUID id);
+
+    void delete(UUID uuid);
+
+    void update(Book book);
 }
