@@ -10,56 +10,41 @@ import java.util.stream.Collectors;
  * Cette implémentation choisit de stocker nos livres en mémoire (dans une ArrayList)
  */
 public class BookDaoInMemory implements BookDao {
-    private List<Book> books = new ArrayList<>();
+    private Map<UUID, Book> bookMap = new HashMap<>();
 
     @Override
     public List<Book> findAll() {
-        return books;
-    }
-
-    @Override
-    public Iterator<Book> iteratorOnAll() {
-        return books.iterator();
+        return new ArrayList<>(bookMap.values());
     }
 
     @Override
     public void add(Book book) {
-        books.add(book);
+        bookMap.put(book.getId(), book);
     }
 
+    @Override
     public List<Book> findBooksContainingName(String name) {
-        return books.stream()
+        return bookMap.values()
+                .stream()
                 .filter(book -> book.getName().toLowerCase().contains(name.toLowerCase()))
                 .collect(Collectors.toList());
     }
 
     @Override
     public Optional<Book> findById(UUID id) {
-//        for (Book book : books) {
-//            if (book.getId().equals(id)) {
-//                return Optional.of(book);
-//            }
-//        }
-//        return Optional.empty();
-
-        return books.stream()
+        return bookMap.values()
+                .stream()
                 .filter(book -> book.getId().equals(id))
                 .findFirst();
     }
 
     @Override
     public void delete(UUID uuid) {
-        books.removeIf(book -> book.getId().equals(uuid));
+        bookMap.remove(uuid);
     }
 
     @Override
     public void update(Book book) {
-        int index = -1;
-        for (int i = 0; i < books.size(); i++) {
-            if (book.getId().equals(books.get(i).getId())) {
-                index = i;
-            }
-        }
-        books.set(index, book);
+        bookMap.put(book.getId(), book);
     }
 }

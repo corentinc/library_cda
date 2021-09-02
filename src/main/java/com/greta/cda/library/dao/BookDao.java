@@ -13,8 +13,6 @@ import java.util.UUID;
 public interface BookDao {
     List<Book> findAll();
 
-    Iterator<Book> iteratorOnAll();
-
     void add(Book book);
 
     List<Book> findBooksContainingName(String name);
