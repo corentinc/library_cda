@@ -1,5 +1,6 @@
-package com.greta.cda.library.dao;
+package com.greta.cda.library.dao.impl;
 
+import com.greta.cda.library.dao.BookDao;
 import com.greta.cda.library.domain.Book;
 import com.greta.cda.library.repository.BookRepository;
 import lombok.RequiredArgsConstructor;

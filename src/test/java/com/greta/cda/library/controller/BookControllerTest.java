@@ -51,6 +51,6 @@ class BookControllerTest {
                 .content(bodyAsJson)
         ).andExpect(status().isOk());
 
-        verify(bookService).update(UUID.fromString("11111111-1111-1111-1111-111111111111"), new Book(null, "nouveau"));
+        verify(bookService).update(new Book(UUID.fromString("11111111-1111-1111-1111-111111111111"), "nouveau"));
     }
 }

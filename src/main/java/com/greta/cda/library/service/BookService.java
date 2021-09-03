@@ -17,10 +17,11 @@ public class BookService {
     private final BookDao bookDao;
     private final Logger logger = LoggerFactory.getLogger(getClass());
 
-    public void add(String name) {
+    public Book add(String name) {
         Book newBook = new Book(UUID.randomUUID(), name);
         bookDao.add(newBook);
         logger.info("Un nouveau livre a été créé : nom={}", name);
+        return newBook;
     }
 
     public List<Book> findAll() {
@@ -40,11 +41,7 @@ public class BookService {
         bookDao.delete(uuid);
     }
 
-    public void update(UUID uuid, Book book) {
-        Book myActualBook = findById(uuid);
-        if (book.getName() != null) {
-            myActualBook.setName(book.getName());
-        }
-        bookDao.update(myActualBook);
+    public void update(Book book) {
+        bookDao.update(book);
     }
 }

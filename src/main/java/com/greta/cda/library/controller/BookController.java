@@ -35,7 +35,8 @@ public class BookController {
 
     @PutMapping("/{uuid}")
     public void update(@PathVariable UUID uuid, @RequestBody Book book) {
-        bookService.update(uuid, book);
+        book.setId(uuid);
+        bookService.update(book);
     }
 
     @GetMapping("/name/{queryName}")
