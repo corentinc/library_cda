@@ -3,25 +3,24 @@ package com.greta.cda.library.service;
 import com.greta.cda.library.dao.BookDao;
 import com.greta.cda.library.domain.Book;
 import com.greta.cda.library.exception.BookNotFoundException;
+import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
-import java.util.Iterator;
 import java.util.List;
 import java.util.UUID;
 
 @Service
+@RequiredArgsConstructor
 public class BookService {
-    // a une dépendance vers le BookDao
-    private BookDao bookDao;
-
-    public BookService(BookDao bookDao) {
-        // Ne sait pas quelle implémentation de BookDao on lui a envoyée
-        this.bookDao = bookDao;
-    }
+    private final BookDao bookDao;
+    private final Logger logger = LoggerFactory.getLogger(getClass());
 
     public void add(String name) {
         Book newBook = new Book(UUID.randomUUID(), name);
         bookDao.add(newBook);
+        logger.info("Un nouveau livre a été créé : nom={}", name);
     }
 
     public List<Book> findAll() {
@@ -33,12 +32,6 @@ public class BookService {
     }
 
     public Book findById(UUID id) {
-//        Optional<Book> optionalBook = bookDao.findById(id);
-//        if (optionalBook.isPresent()) {
-//            return optionalBook.get();
-//        }
-//        throw new BookNotFoundException(id);
-
         return bookDao.findById(id)
                 .orElseThrow(() -> new BookNotFoundException(id));
     }
