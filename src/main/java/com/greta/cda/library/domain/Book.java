@@ -1,50 +1,25 @@
 package com.greta.cda.library.domain;
 
-import java.util.Objects;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import java.util.UUID;
 
 /**
  * Représente un Livre
  */
+@Entity
+@NoArgsConstructor
+@AllArgsConstructor
+@Data
 public class Book {
+    @Id
+    @Column(length = 36)
+    @org.hibernate.annotations.Type(type="uuid-char")
     private UUID id;
     private String name;
-
-    public Book(UUID id, String name) {
-        this.id = id;
-        this.name = name;
-    }
-
-    public UUID getId() {
-        return id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    @Override
-    public String toString() {
-        return "Book{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                '}';
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Book book = (Book) o;
-        return Objects.equals(id, book.id) && Objects.equals(name, book.name);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, name);
-    }
 }

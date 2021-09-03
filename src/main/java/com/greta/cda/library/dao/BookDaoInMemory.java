@@ -1,6 +1,7 @@
 package com.greta.cda.library.dao;
 
 import com.greta.cda.library.domain.Book;
+import org.springframework.stereotype.Repository;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -9,6 +10,7 @@ import java.util.stream.Collectors;
  * Implémente l'interface BookDAO
  * Cette implémentation choisit de stocker nos livres en mémoire (dans une ArrayList)
  */
+@Repository
 public class BookDaoInMemory implements BookDao {
     private Map<UUID, Book> bookMap = new HashMap<>();
 

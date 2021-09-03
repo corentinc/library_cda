@@ -37,4 +37,9 @@ public class BookController {
     public void update(@PathVariable UUID uuid, @RequestBody Book book) {
         bookService.update(uuid, book);
     }
+
+    @GetMapping("/name/{queryName}")
+    public List<Book> findByName(@PathVariable String queryName) {
+        return bookService.findBooksContainingName(queryName);
+    }
 }
