@@ -29,7 +29,7 @@ public class AuthorService {
 
     @Transactional
     public void attachBook(UUID authorId, Book book) {
-        Author author = authorDao.findById(authorId).orElseThrow(() -> new AuthorNotFoundException());
+        Author author = authorDao.findById(authorId).orElseThrow(() -> new AuthorNotFoundException(authorId));
         Book bookCreated = bookService.add(book.getName());
         bookCreated.setAuthor(author);
         author.getBooks().add(bookCreated);
@@ -38,7 +38,7 @@ public class AuthorService {
     }
 
     public List<Book> getById(UUID authorId) {
-        Author author = authorDao.findById(authorId).orElseThrow(() -> new AuthorNotFoundException());
+        Author author = authorDao.findById(authorId).orElseThrow(() -> new AuthorNotFoundException(authorId));
         return author.getBooks();
     }
 
